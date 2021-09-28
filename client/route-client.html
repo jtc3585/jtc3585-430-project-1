@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Route Client</title>
+    <link href="default-styles.css" type="text/css" rel="stylesheet" />
+    <style>
+      header{
+        background-color:darkslategray;
+        color: lightblue;
+        font-size:2em;
+        padding:1em;
+      }
+      
+      h1{
+        font-family: fantasy;
+        filter: drop-shadow(5px 5px 2px #4444dd);
+      }
+      
+      section{
+        border-bottom:1px dashed gray;
+      }
+    </style>
+    <script>
+        const handleStop = (e) => {
+          console.log(e);
+             console.log("e.target =", e.target); // here, "e.target" is the 'xhr' object
+             console.log("e.target.response = ", e.target.response); // so that means this is a string of "joke" JSON
+             const obj = JSON.parse(e.target.response); // turn it back into an object
+             console.log("obj=",obj);
+             // now go ahead and update #jokeContainer with the contents of the joke
+                document.querySelector("#stopContainer").innerHTML=`<p><b>Address:</b>${obj[0].address} <b>Client:</b>${obj[0].client}</p>`;
+
+        }
+        const handleRoute = (e) => {
+          console.log(e);
+             console.log("e.target =", e.target); // here, "e.target" is the 'xhr' object
+             console.log("e.target.response = ", e.target.response); // so that means this is a string of "joke" JSON
+             const obj = JSON.parse(e.target.response); // turn it back into an object
+             console.log("obj=",obj);
+             // now go ahead and update #jokeContainer with the contents of the joke
+
+             document.querySelector("#routeContainer").innerHTML=``;
+                element = document.querySelector("#routeContainer");
+                 for(i = 0; i < obj.length; i++)
+                 {
+                    const para = document.createElement("p");
+                    const node = document.createTextNode(`Address:${obj[i].address} Client:${obj[i].client}`);
+                    para.appendChild(node);
+                    element.appendChild(para);
+                 }
+
+
+        }
+      const downloadRoute = (e) => {
+        // remember that an `Event` object gets passed along every time that an event handler or listener calls a function
+        // the `target` property of that event points at the element that sent the event, in this case a button
+        console.log(`An element of id=${e.target.id} was clicked!`);
+        let apiURL = "/getRoutes"
+
+
+        const xhr = new XMLHttpRequest();
+        if(e.target.id === "btnStop"){
+          xhr.onload = handleStop;
+        }
+        else
+        {
+          xhr.onload = handleRoute;
+        }
+
+        xhr.open("GET",apiURL);
+        // with XHR, after we open a connection, but before we "send()", we can set 1 or more HTTP request headers
+        // this isn't strictly neccessary because "/random-joke" sends JSON by default
+        xhr.setRequestHeader('Accept',"application/javascript");
+        xhr.send();
+      }
+      
+      const init = () => {
+         // An Event *Handler*
+        // document.querySelector("#btnJoke").onclick = downloadJoke; // same as below, less typing, use which ever version you prefer
+      
+        // An Event *Listener*
+        document.querySelector("#btnStop").addEventListener("click", downloadRoute);
+      
+        // **Actually, event handlers and listeners are NOT exactly the same in all use cases - what ARE the differences?**
+        document.querySelector("#btnRoute").addEventListener("click", downloadRoute)
+      }
+      
+      window.onload = init;
+     
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Route Tracker</h1>
+    </header>
+    
+    <section>
+      <h2>Click here to see the stop in progress or last completed stop</h2>
+      <p><button id="btnStop">Check Stop</button></p>
+      <div id="stopContainer">
+        
+      </div>
+    </section>
+    
+    <section>
+      <h2>Click here to see the whole route</h2>
+      <p><button id="btnRoute">Show me the Route</button></p>
+      <div id="routeContainer">
+
+      </div>
+    </section>
+    
+  </body>
+</html>
