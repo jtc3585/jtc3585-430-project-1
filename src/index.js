@@ -13,11 +13,11 @@ const urlStruct = {
   '/admin': htmlHandler.getAdmin,
   '/': htmlHandler.getIndex,
   '/home': htmlHandler.getIndex,
-  '/suggest': htmlHandler.getSuggest,  
+  '/suggest': htmlHandler.getSuggest,
   '/route-client.html': htmlHandler.getClient,
   '/default-style.css': htmlHandler.getCSS,
   notFound: htmlHandler.get404Response,
-  '/getRoutes': responseHandler.getRoutesResponse
+  '/getRoutes': responseHandler.getRoutesResponse,
 };
 
 // locally this will be 3000, on Heroku it will be assigned
@@ -36,10 +36,10 @@ const onRequest = (request, response) => {
   let acceptedTypes = request.headers.accept && request.headers.accept.split(',');
   acceptedTypes = acceptedTypes || [];
 
-  const httpMethod = request.method
+  const httpMethod = request.method;
 
   if (urlStruct[pathname]) {
-    urlStruct[pathname](request, response, params, acceptedTypes,httpMethod);
+    urlStruct[pathname](request, response, params, acceptedTypes, httpMethod);
   } else {
     urlStruct.notFound(request, response);
   }

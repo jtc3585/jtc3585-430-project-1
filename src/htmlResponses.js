@@ -8,10 +8,10 @@ const suggestPage = fs.readFileSync(`${__dirname}/../client/suggest.html`);
 const css = fs.readFileSync(`${__dirname}/../client/default-style.css`);
 
 const getClient = (request, response) => {
-    response.writeHead(200, { 'Content-Type': 'text-html' }); // send response headers
-    response.write(client); // send content
-    response.end(); // close connection
-  };
+  response.writeHead(200, { 'Content-Type': 'text-html' }); // send response headers
+  response.write(client); // send content
+  response.end(); // close connection
+};
 
 const get404Response = (request, response) => {
   response.writeHead(404, { 'Content-Type': 'text-html' }); // send response headers
@@ -37,17 +37,17 @@ const getSuggest = (request, response) => {
   response.end(); // close connection
 };
 
-const getCSS = (request,response) => {
-    response.writeHead(200, { 'Content-Type': 'text/css' });
-    response.write(css);
-    response.end();    
-}
-
-const getIMG = (request,response) => {
+const getCSS = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/css' });
   response.write(css);
-  response.end();    
-}
+  response.end();
+};
+
+const getIMG = (request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/css' });
+  response.write(css);
+  response.end();
+};
 module.exports.getClient = getClient;
 module.exports.getAdmin = getAdmin;
 module.exports.getIndex = getIndex;

@@ -14,6 +14,7 @@
         "no-unused-vars":"warn",
         "no-param-reassign":"warn",
         "no-plusplus":"warn",
-        "no-undef":"warn"
+        "no-undef":"warn",
+        "max-len":"warn"
         }
 }

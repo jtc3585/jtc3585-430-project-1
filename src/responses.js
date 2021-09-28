@@ -11,9 +11,8 @@ const _ = require('underscore');
 
 // Gets all the routes in the database
 const getAllRoutes = () => {
-
   const responseObj = _.shuffle(stops);
-/*   if (type === true) {
+  /*   if (type === true) {
     let responseXML = '<response>';
     for (i = 0; i < limit; i++) {
       responseXML += `
@@ -30,13 +29,12 @@ const getAllRoutes = () => {
   return JSON.stringify(responseObj);
 };
 
-
 const getRoutesResponse = (request, response, params, acceptedTypes, httpMethod) => {
 /*   if (acceptedTypes.includes('text/xml') === true) {
     if(httpMethod === "HEAD"){
       response.writeHead(200,{ 'Content-Type': 'text/xml','Content-Length': getBinarySize(getAllRoutes(params.limit,true))});
       response.end();
-    }else{    
+    }else{
     response.writeHead(200,{ 'Content-Type': 'text/xml' });
     response.write(getAllRoutes(params.limit, true));
     response.end();
