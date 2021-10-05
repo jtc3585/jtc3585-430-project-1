@@ -56,4 +56,37 @@ const getRoutesResponse = (request, response, params, acceptedTypes, httpMethod)
   response.end();
 };
 
+const respondJsonMeta = (request,response,status) => {
+  response.writeHead(status, {'Content-Type': 'application/json'});
+  response.end();
+}
+
+const respondJson = (request,response,status,object)=>{
+  response.writeHead(status,{'Content-Type': 'application/json'});
+  response.write(JSON.stringify(object));
+  response.end();
+}
+
+const postAddClient = (request,response,body)=>{
+  const responseJSON ={
+    message:'address and name are both required',
+  };
+
+  console.log(body);
+  if(!body.address || !body.client){
+    responseJSON.id = 'missingParams';
+    return respondJson(request,response,400,responseJSON);
+  }
+
+  let responseCode = 201;
+
+  stops.push({address:body.address,client:body.client})
+
+  if(responseCode === 201) {
+    responseJSON.message ='Created Successfully';
+    return respondJson(request,response,responseCode,responseJSON);
+  }
+}
+
 module.exports.getRoutesResponse = getRoutesResponse;
+module.exports.postAddClient = postAddClient;

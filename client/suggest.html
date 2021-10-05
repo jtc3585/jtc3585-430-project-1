@@ -8,11 +8,11 @@
         <h1>Suggest a Stop!</h1>
         <p>Are you interested in becoming a client or know someone who is?</p>
         <p>Fill out the form below to get added to our route</p>
-        <form>
+        <form method="POST" action="/addClient">
             <label for="addressInput">Address:</label><br>
-            <input type="text" id="addressInput" name="addressInput"><br>
+            <input type="text" id="addressInput" name="address"><br>
             <label for="nameInput">Name:</label><br>
-            <input type="text" id="nameInput" name="nameInput"><br>
+            <input type="text" id="nameInput" name="client"><br>
             <input type="submit" value="Submit">
         </form>
     </body>
